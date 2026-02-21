@@ -1,4 +1,4 @@
-name: Sauce Demo Test
+name: Sauce Demo Test CI
 
 on:
   push:
