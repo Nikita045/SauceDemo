@@ -1,7 +1,6 @@
 from playwright.sync_api import Page,expect
 from POM.SauceDemo_Login_Page import Sauce_LoginPage, INVENTORY_URL
 import pytest
-pytestmark=pytest.mark.smoke
 
 @pytest.mark.parametrize("username,password, error_message", [
     ("nikita", "secret_sauce","Epic sadface: Username and password do not match any user in this service"),
