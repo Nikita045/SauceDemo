@@ -2,9 +2,9 @@ name: Sauce Demo Test CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
   test:
@@ -32,8 +32,8 @@ jobs:
         run: |
           playwright install --with-deps
 
-      # Step 5: Run Smoke Tests
-      - name: Run Smoke Tests
+      # Step 5: Run Sanity Tests
+      - name: Run Sanity Tests
         run: |
             mkdir -p reports
             pytest -v --browser chromium --html=reports/report.html --self-contained-html

@@ -3,7 +3,7 @@ from playwright.sync_api import Page,expect
 from POM.SauceDemo_Dashboard import SauceDemo_Inventory
 from POM.SauceDemo_Checkout import CartPage
 
-def test_checkout_positive_flow(logged_in_page):
+def test_TC08_checkout_positive_flow(logged_in_page):
     page=logged_in_page
     inventory = SauceDemo_Inventory(page)
     checkout = CartPage(page)
@@ -17,7 +17,7 @@ def test_checkout_positive_flow(logged_in_page):
     checkout.click_continue()
     checkout.click_finish()
 
-def test_continue_shop_flow(logged_in_page):
+def test_TC09_continue_shop_flow(logged_in_page):
     page = logged_in_page
     inventory = SauceDemo_Inventory(page)
     checkout = CartPage(page)
@@ -33,7 +33,7 @@ def test_continue_shop_flow(logged_in_page):
 
 
 
-def test_checkout_negative_flow(logged_in_page):
+def test_TC10_checkout_negative_flow(logged_in_page):
     page = logged_in_page
     inventory = SauceDemo_Inventory(page)
     checkout = CartPage(page)
