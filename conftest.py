@@ -1,16 +1,41 @@
-from playwright.sync_api import Page
+from playwright.sync_api import Playwright, Page, sync_playwright
 import pytest
 import os
 from datetime import datetime
 import allure
+
+from POM.SauceDemo_Dashboard import SauceDemo_Inventory
 from POM.SauceDemo_Login_Page import Sauce_LoginPage
 
+@pytest.fixture(scope="session")
+def base_url():
+    env=os.getenv("ENV","qa")
+    urls={
+        "qa":"https://www.saucedemo.com",
+        "dev":"https://www.saucedemo.com"
+    }
+    return urls[env]
+
+@pytest.fixture(scope="function")
+def page():
+    with sync_playwright() as p:
+        browser = p.chromium.launch(headless=True)
+        context = browser.new_context()
+        page = context.new_page()
+        yield page
+        browser.close()
 
 @pytest.fixture
-def logged_in_page(page):
+def logged_in_page(page,base_url):
+    page.goto(base_url)
     login=Sauce_LoginPage(page)
     login.sauce_login("standard_user", "secret_sauce")
     return page
+
+@pytest.fixture
+def inventory_page(logged_in_page):
+    return SauceDemo_Inventory(logged_in_page)
+
 
 def pytest_configure(config):
     reports_dir = "reports"

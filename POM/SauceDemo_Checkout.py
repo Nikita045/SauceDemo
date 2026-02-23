@@ -3,21 +3,45 @@ from playwright.sync_api import Page
 
 class CartPage:
 
-    def __init__(self,page:Page):
+    def __init__(self, page: Page):
         self.page = page
-        self.checkout_btn=self.page.locator('[data-test="checkout"]')
-        self.firstname_inp=self.page.get_by_placeholder("First Name")
-        self.lastname_inp=self.page.get_by_placeholder("Last Name")
-        self.postal_code_inp=self.page.get_by_placeholder("Zip/Postal Code")
-        self.continue_shop_btn=self.page.locator('[data-test="continue-shopping"]')
-        self.continue_btn=self.page.get_by_role("button",name="Continue")
-        self.finish_btn=self.page.get_by_role("button",name="Finish")
-        self.error_message=self.page.locator('[data-test="error"]')
+
+    @property
+    def checkout_btn(self):
+        return self.page.locator('[data-test="checkout"]')
+
+    @property
+    def firstname_inp(self):
+        return self.page.get_by_placeholder("First Name")
+
+    @property
+    def lastname_inp(self):
+        return self.page.get_by_placeholder("Last Name")
+
+    @property
+    def postal_code_inp(self):
+        return self.page.get_by_placeholder("Zip/Postal Code")
+
+    @property
+    def continue_shop_btn(self):
+        return self.page.locator('[data-test="continue-shopping"]')
+
+    @property
+    def continue_btn(self):
+        return self.page.get_by_role("button", name="Continue")
+
+    @property
+    def finish_btn(self):
+        return self.page.get_by_role("button", name="Finish")
+
+    @property
+    def error_message(self):
+        return self.page.locator('[data-test="error"]')
 
     def click_checkout(self):
         self.checkout_btn.click()
 
-    def enter_checkout_details(self,firstname,lastname,postal_code):
+    def enter_checkout_details(self, firstname, lastname, postal_code):
         self.firstname_inp.fill(firstname)
         self.lastname_inp.fill(lastname)
         self.postal_code_inp.fill(postal_code)
